@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchPost, deletePost } from "../actions";
+import ShowComment from './post_show_comment';
 
 class PostsShow extends Component {
   componentDidMount() {
@@ -31,11 +32,13 @@ class PostsShow extends Component {
           className="btn btn-danger pull-xs-right"
           onClick={this.onDeleteClick.bind(this)}
         >
-          Delete Post
+          Delete Idea
         </button>
+
         <h3>{post.name}</h3>
         <h6>Phone: {post.phoneNumber}</h6>
         <p>{post.gender}</p>
+        <ShowComment/>
       </div>
     );
   }
