@@ -1,0 +1,12 @@
+.background {
+  width: 1232px;
+  margin: 0px auto;
+  padding-top: 500px;
+  background-image: url("./visual/hero.png");
+}
+
+.content-wrapper {
+  width: 960px;
+  margin: 0 auto 0 auto;
+  background-color: white;
+}
