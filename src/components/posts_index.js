@@ -70,10 +70,12 @@ class PostsIndex extends Component {
           </div>
         </div>
 
-        <h3>Posts</h3>
-        <ul className="list-group">
-          {this.renderPosts()}
-        </ul>
+        <div>
+          <h3>IDEA BOARD</h3>
+          <ul className="list-group">
+            {this.renderPosts()}
+          </ul>
+        </div>
       </div>
     );
   }

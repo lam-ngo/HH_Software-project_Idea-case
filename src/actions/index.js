@@ -1,52 +1,64 @@
 import axios from "axios";
 
-export const FETCH_POSTS = "fetch_posts";
-export const FETCH_POST = "fetch_post";
-export const CREATE_POST = "create_post";
-export const DELETE_POST = "delete_post";
+export const CREATE_IDEA = "create_idea";
+export const FETCH_IDEA = "fetch_idea";
+export const FETCH_ALL_IDEAS = "fetch_all_ideas";
+export const UPDATE_IDEA = "update_idea";
+export const DELETE_IDEA = "delete_idea";
+export const FETCH_ALL_COMMENTS = "fetch_all_comments";
 
-const ROOT_URL = 'http://localhost:3000/api/farmers';
+const ROOT_URL = 'https://idea-management.herokuapp.com/api/ideas';
 
-
-export function fetchPosts() {
-  const request = axios.get(`${ROOT_URL}`);
+export function createIdea(value, callback) {
+  const request = axios.post(`${ROOT_URL}`, value).then(() => callback());
 
   return {
-    type: FETCH_POSTS,
+    type: CREATE_IDEA,
     payload: request
   };
 }
 
-export function createPost(values, callback) {
-  const request = axios
-    .post(`${ROOT_URL}`, values)
-    .then(() => callback());
+export function fetchIdea(id, callback) {
+  const request = axios.get(`${ROOT_URL}/:${id}`).then(() => callback());
 
   return {
-    type: CREATE_POST,
+    type: FETCH_IDEA,
     payload: request
   };
 }
 
-export function fetchPost(id) {
-  const request = axios.get(`${ROOT_URL}/${id}`);
+export function fetchAllIdeas(callback) {
+  const request = axios.get(`${ROOT_URL}`).then(() => callback());
 
   return {
-    type: FETCH_POST,
+    type: FETCH_ALL_IDEAS,
     payload: request
   };
 }
 
-export function deletePost(id, callback) {
-  const request = axios
-    .delete(`${ROOT_URL}/${id}`)
-    .then(() => callback());
+export function updateIdea(id, value, callback) {
+  const request = axios.put(`${ROOT_URL}/:${id}`, value).then(() => callback());
 
   return {
-    type: DELETE_POST,
-    payload: id
+    type: UPDATE_IDEA,
+    payload: request
   };
 }
 
+export function deleteIdea(id, callback) {
+  const request = axios.delete(`${ROOT_URL}/:${id}`).then(() => callback());
 
+  return {
+    type: DELETE_IDEA,
+    payload: request
+  };
+}
 
+export function fetchAllIdeas(id, callback) {
+  const request = axios.get(`${ROOT_URL}/:${id}/comments`).then(() => callback());
+
+  return {
+    type: FETCH_ALL_COMMENTS,
+    payload: request
+  };
+}
