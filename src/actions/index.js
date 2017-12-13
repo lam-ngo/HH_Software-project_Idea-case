@@ -19,7 +19,7 @@ export function createIdea(value, callback) {
 }
 
 export function fetchIdea(id, callback) {
-  const request = axios.get(`${ROOT_URL}/:${id}`).then(() => callback());
+  const request = axios.get(`${ROOT_URL}/${id}`).then(() => callback());
 
   return {
     type: FETCH_IDEA,
@@ -37,7 +37,7 @@ export function fetchAllIdeas(callback) {
 }
 
 export function updateIdea(id, value, callback) {
-  const request = axios.put(`${ROOT_URL}/:${id}`, value).then(() => callback());
+  const request = axios.put(`${ROOT_URL}/${id}`, value).then(() => callback());
 
   return {
     type: UPDATE_IDEA,
@@ -46,7 +46,7 @@ export function updateIdea(id, value, callback) {
 }
 
 export function deleteIdea(id, callback) {
-  const request = axios.delete(`${ROOT_URL}/:${id}`).then(() => callback());
+  const request = axios.delete(`${ROOT_URL}/${id}`).then(() => callback());
 
   return {
     type: DELETE_IDEA,
@@ -55,7 +55,7 @@ export function deleteIdea(id, callback) {
 }
 
 export function fetchAllComments(id, callback) {
-  const request = axios.get(`${ROOT_URL}/:${id}/comments`).then(() => callback());
+  const request = axios.get(`${ROOT_URL}/${id}/comments`).then(() => callback());
 
   return {
     type: FETCH_ALL_COMMENTS,

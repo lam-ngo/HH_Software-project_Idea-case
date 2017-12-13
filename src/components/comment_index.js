@@ -2,24 +2,24 @@ import _ from "lodash";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchIdea } from "../actions";
+import { fetchAllComments } from "../actions";
 
 
 class ShowComment extends Component {
 
 
   componentDidMount() {
-    this.props.fetchPosts();
+    this.props.fetchPosts(this.props.id);
   }
 
   renderPosts() {
-    const people =  this.props.posts;
-    return _.map(people, (post) => {
+    const comments =  this.props.comments;
+    return _.map(comments, (comment) => {
       return (
-        <li className="list-group-item" key={post._id}>
+        <li className="list-group-item" key={comment._ideaId}>
 
-            {post.name}<br/>
-
+            {comment.ideaId}<br/>
+            {comment.commentLine}<br/>
 
 
 
@@ -52,4 +52,4 @@ function mapStateToProps(state) {
   return { posts: state.posts };
 }
 
-export default connect(mapStateToProps, { fetchPosts })(ShowComment);
+//export default connect(mapStateToProps, { fetchPosts })(ShowComment);

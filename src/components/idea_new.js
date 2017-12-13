@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { createIdea } from "../actions";
 
-class NewIdea extends Component {
+class IdeaNew extends Component {
   renderField(field) {
     const { meta: { touched, error } } = field;
     const className = `form-group ${touched && error ? "has-danger" : ""}`;
@@ -30,47 +30,28 @@ class NewIdea extends Component {
     const { handleSubmit } = this.props;
 
     return (
-      <div class="container">
-      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-        <Field
-          label="Title"
-          name="title"
-          component={this.renderField}
-        />
-        <Field
-          label="Category"
-          name="category"
-          component={this.renderField}
-        />
-        <Field
-          label="Description"
-          name="description"
-          component={this.renderField}
-        />
-        <Field
-          label="Budget"
-          name="budget"
-          component={this.renderField}
-        />
+      <div className="container">
+        <h3>NEW IDEA</h3>
+        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+          <p>Title</p>
+          <Field name="title" component={this.renderField} />
+          <p>Category</p>
+          <Field name="category" component={this.renderField} />
+          <p>Description</p>
+          <Field name="description" component={this.renderField} />
+          <p>Budget</p>
+          <Field name="budget" component={this.renderField} />
+          <p>Created</p>
+          <Field name="created" component={this.renderField} />
+          <p>Last Modified</p>
+          <Field name="lastModified" component={this.renderField} />
+          <p>Comment</p>
+          <Field name="comment" component={this.renderField} />
 
-        <Field
-          label="Created"
-          name="created"
-          component={this.renderField}
-        />
-        <Field
-          label="Last Modified"
-          name="lastModified"
-          component={this.renderField}
-        />
-        <Field
-          label="Comment"
-          name="comment"
-          component={this.renderField}
-        />
-        <button type="submit" className="btn btn-primary">Submit</button>
-        <Link to="/" className="btn btn-danger">Cancel</Link>
-      </form>
+          <button type="submit" className="button button-edit button-text">SUBMIT</button>
+
+          <Link to="/" className="button button-delete button-text">CANCEL</Link>
+        </form>
       </div>
     );
   }
@@ -96,4 +77,4 @@ function validate(values) {
 export default reduxForm({
   validate,
   form: "IdeaNewForm"
-})(connect(null, { createIdea })(NewIdea));
+})(connect(null, { createIdea })(IdeaNew));

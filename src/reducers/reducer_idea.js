@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { CREATE_IDEA, FETCH_IDEA, FETCH_ALL_IDEAS, DELETE_IDEA } from "../actions";
+import { CREATE_IDEA, FETCH_IDEA, FETCH_ALL_IDEAS, UPDATE_IDEA, DELETE_IDEA } from "../actions";
 
 export default function(state = {}, action) {
   switch (action.type) {

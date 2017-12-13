@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { fetchIdea, updateIdea, deleteIdea } from "../actions";
 import ShowComment from './comment_index';
 
-class SingleIdea extends Component {
+class IdeaShow extends Component {
   componentDidMount() {
     const { id } = this.props.match.params;
     this.props.fetchIdea(id);
@@ -17,7 +17,7 @@ class SingleIdea extends Component {
       this.props.history.push("/");
     });
   }
-
+  //<ShowComment id={idea.id}/>
   render() {
     const { idea } = this.props;
 
@@ -38,7 +38,7 @@ class SingleIdea extends Component {
         <h3>Id: {idea.id}</h3>
         <h6>Title: {idea.title}</h6>
         <p>Description: {idea.description}</p>
-        <ShowComment id={idea.id}/>
+
       </div>
     );
   }
@@ -48,4 +48,4 @@ function mapStateToProps({ ideas }, ownProps) {
   return { idea: ideas[ownProps.match.params.id] };
 }
 
-export default connect(mapStateToProps, { fetchIdea, deleteIdea })(SingleIdea);
+export default connect(mapStateToProps, { fetchIdea, deleteIdea })(IdeaShow);
