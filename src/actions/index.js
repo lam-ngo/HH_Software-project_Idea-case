@@ -54,7 +54,7 @@ export function deleteIdea(id, callback) {
   };
 }
 
-export function fetchAllIdeas(id, callback) {
+export function fetchAllComments(id, callback) {
   const request = axios.get(`${ROOT_URL}/:${id}/comments`).then(() => callback());
 
   return {

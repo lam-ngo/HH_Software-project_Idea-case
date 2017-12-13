@@ -2,7 +2,7 @@ import _ from "lodash";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchPosts } from "../actions";
+import { fetchAllIdeas } from "../actions";
 
 const customStyle = {
   addIdea: {
@@ -10,37 +10,26 @@ const customStyle = {
     boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
   }
 };
-class PostsIndex extends Component {
+class IdeaIndex extends Component {
   constructor(props){
     super(props);
       this.state = {
-        term: '',
-        currentPeople: null
+        allIdeas: null
       }
-    this.searchHandler= this.searchHandler.bind(this);
   }
 
   componentDidMount() {
-    this.props.fetchPosts();
+    this.props.fetchAllIdeas();
   }
 
-  searchHandler(event){
-    let searchingFor = _.filter(this.props.posts, (post) => post.name.includes(event.target.value) || post.phoneNumber.includes(event.target.value));
-
-    this.setState({
-      term: event.target.value,
-      currentPeople: searchingFor
-    });
-  }
-
-  renderPosts() {
-    const people = (this.state.currentPeople) ? this.state.currentPeople : this.props.posts;
-    return _.map(people, (post) => {
+  renderIdeas() {
+    const allIdeas = (this.state.allIdeas) ? this.state.allIdeas : this.props.ideas;
+    return _.map(allIdeas, (idea) => {
       return (
-        <li className="list-group-item" key={post._id}>
-          <Link to={`/posts/${post._id}`}>
-            {post.name}<br/>
-            {post.gender}<br/>
+        <li key={idea._id}>
+          <Link to={`/ideas/:${idea._id}`}>
+            {idea.id}<br/>
+            {idea.title}<br/>
 
           </Link>
 
@@ -50,7 +39,6 @@ class PostsIndex extends Component {
   }
 
   render() {
-    const { term }= this.state;
     return (
       <div>
 
@@ -72,8 +60,8 @@ class PostsIndex extends Component {
 
         <div>
           <h3>IDEA BOARD</h3>
-          <ul className="list-group">
-            {this.renderPosts()}
+          <ul>
+            {this.renderIdeas()}
           </ul>
         </div>
       </div>
@@ -82,7 +70,7 @@ class PostsIndex extends Component {
 }
 
 function mapStateToProps(state) {
-  return { posts: state.posts };
+  return { ideas: state.ideas };
 }
 
-export default connect(mapStateToProps, { fetchPosts })(PostsIndex);
+export default connect(mapStateToProps, { fetchAllIdeas })(IdeaIndex);
