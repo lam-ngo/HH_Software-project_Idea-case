@@ -2,9 +2,9 @@ import { CREATE_IDEA, FETCH_IDEA, FETCH_ALL_IDEAS, UPDATE_IDEA, DELETE_IDEA } fr
 
 export default function(state = {}, action) {
   switch (action.type) {
-    //
-    // case CREATE_IDEA:
-    //   return state;
+
+    case CREATE_IDEA:
+      return state;
 
     case FETCH_IDEA:
       console.log(`From reducer: ${action.type},  ${action.payload}`);

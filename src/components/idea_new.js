@@ -1,80 +1,113 @@
 import React, { Component } from "react";
-import { Field, reduxForm } from "redux-form";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { createIdea } from "../actions";
 
-class IdeaNew extends Component {
-  renderField(field) {
-    const { meta: { touched, error } } = field;
-    const className = `form-group ${touched && error ? "has-danger" : ""}`;
+const customStyle = {
+  heading: {
+    margin: '0px 0px 30px 0px',
+  },
+  button: {
+    margin: '20px 5px'
+  }
+};
 
-    return (
-      <div className={className}>
-        <label>{field.label}</label>
-        <input type="text" {...field.input} />
-        <div>
-          {touched ? error : ""}
-        </div>
-      </div>
-    );
+class IdeaNew extends Component {
+  constructor(props) {
+    super(props),
+    this.state = {
+      newIdea: {
+        title: '',
+        description: '',
+        budget: '',
+        isReadyForComments: "false",
+        peopleNeeded: '',
+        categoryId: '',
+      }
+    }
+  }
+  renderField(field) {
+    // const { meta: { touched, error } } = field;
+    // const className = `form-group ${touched && error ? "has-danger" : ""}`;
+    //
+    // return (
+    //   <div className={className}>
+    //     <label>{field.label}</label>
+    //     <input type="text" {...field.input} />
+    //     <div>
+    //       {touched ? error : ""}
+    //     </div>
+    //   </div>
+    // );
   }
 
-  onSubmit(values) {
-    this.props.createIdea(values, () => {
+  onSubmit(e) {
+    e.preventDefault();
+
+    let newIdea = this.state.newIdea;
+
+    console.log(newIdea);
+
+    if(
+      newIdea.title !== '' && newIdea.description !== '' && newIdea.budget !== '' &&
+      newIdea.peopleNeeded !== '' && newIdea.categoryId !== ''
+    ) {
+      this.props.createIdea(newIdea);
       this.props.history.push("/");
-    });
+    } else {
+      alert('No field can be empty!');
+    }
   }
 
   render() {
-    const { handleSubmit } = this.props;
 
     return (
       <div className="container">
-        <h3>NEW IDEA</h3>
-        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+        <h3 style={customStyle.heading} >NEW IDEA</h3>
+        <form onSubmit={this.onSubmit.bind(this)}>
           <p>Title</p>
-          <Field name="title" component={this.renderField} />
-          <p>Category</p>
-          <Field name="category" component={this.renderField} />
+          <input name="title" value={this.state.newIdea.title} onChange={this.inputChanged} />
           <p>Description</p>
-          <Field name="description" component={this.renderField} />
+          <input name="description" value={this.state.newIdea.description} onChange={this.inputChanged} />
           <p>Budget</p>
-          <Field name="budget" component={this.renderField} />
-          <p>Created</p>
-          <Field name="created" component={this.renderField} />
-          <p>Last Modified</p>
-          <Field name="lastModified" component={this.renderField} />
-          <p>Comment</p>
-          <Field name="comment" component={this.renderField} />
+          <input type="number" name="budget" value={this.state.newIdea.budget} onChange={this.inputChanged} />
+          <p>Ready for comment?  <span>
+              <select name="isReadyForComments" value={this.state.newIdea.isReadyForComments} onChange={this.inputChanged}>
+                <option value="false">No</option>
+                <option value="true">Yes</option>
+              </select> </span>
+          </p>
+          <p>People needed</p>
+          <input type="number" name="peopleNeeded" value={this.state.newIdea.peopleNeeded} onChange={this.inputChanged} />
+          <p>Category id</p>
+          <input type="number" name="categoryId" value={this.state.newIdea.categoryId} onChange={this.inputChanged} /> <br/ >
 
-          <button type="submit" className="button button-edit button-text">SUBMIT</button>
+          <button type="submit" className="button button-edit button-text" style={customStyle.button}>
+            SUBMIT
+          </button>
 
-          <Link to="/" className="button button-delete button-text">CANCEL</Link>
+          <Link to="/">
+            <button className="button button-delete button-text"  style={customStyle.button}>
+              CANCEL
+            </button>
+          </Link>
         </form>
       </div>
     );
   }
+
+  inputChanged = (event) => {
+    console.log(this.state.newIdea);
+    this.setState({
+      newIdea: Object.assign({}, this.state.newIdea, {[event.target.name]: event.target.value})
+    });
+  }
 }
 
-function validate(values) {
-  // console.log(values) -> { title: 'asdf', categories: 'asdf', content: 'asdf' }
-  const errors = {};
-
-  // Validate the inputs from 'values'
-  if (!values.title) {
-    errors.name = "Enter Title";
-  }
-  if (!values.category) {
-    errors.phoneNumber = "Enter your category";
-  }
-
-  // If errors is empty, the form is fine to submit
-  // If errors has *any* properties, redux form assumes form is invalid
-  return errors;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createIdea: (newIdea) => createIdea(newIdea, dispatch)
+  };
 }
 
-export default reduxForm({
-  validate,
-  form: "IdeaNewForm"
-})(connect(null, { createIdea })(IdeaNew));
+export default connect(null, mapDispatchToProps)(IdeaNew);
