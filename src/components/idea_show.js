@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchIdea, updateIdea, deleteIdea } from "../actions";
-//import ShowComment from './comment_index';
+import { fetchIdea, fetchAllComments, updateIdea, deleteIdea } from "../actions";
+import ShowAllComments from './comment_index';
 
 const customStyle = {
   container: {
@@ -21,6 +21,7 @@ class IdeaShow extends Component {
   componentDidMount() {
     const { id } = this.props.match.params;
     this.props.fetchIdea(id);
+    this.props.fetchAllComments(id);
   }
 
   onDeleteClick() {
@@ -30,9 +31,11 @@ class IdeaShow extends Component {
     //   this.props.history.push("/");
     // });
   }
-  //<ShowComment id={idea.id}/>
+
+
+
   render() {
-    const { chosenIdea } = this.props;
+    const { chosenIdea, commentList } = this.props;
 
     if (!chosenIdea) {
       return <div>Loading...</div>;
@@ -53,6 +56,12 @@ class IdeaShow extends Component {
           <p><strong>Category id:</strong> {chosenIdea.categoryId}</p>
         </div>
 
+        <h3 style={customStyle.heading} >Comments</h3>
+
+        <div style={customStyle.container}>
+          <ShowAllComments commentList={commentList}/>
+        </div>
+
         <Link to="/"><button className="button button-primary button-text">Back To Home Page</button></Link>
         <button className="button button-edit button-text" onClick={this.onDeleteClick}>Edit Idea</button>
         <button className="button button-delete button-text" onClick={this.onDeleteClick}>Delete Idea</button>
@@ -63,14 +72,15 @@ class IdeaShow extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    chosenIdea: state.idea.chosenIdea
-    //comment: state.comment
+    chosenIdea: state.idea.chosenIdea,
+    commentList: state.comment.commentList
   };
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchIdea: (id) => fetchIdea(id, dispatch),
+    fetchAllComments: (id) => fetchAllComments(id, dispatch),
     updateIdea: () => updateIdea(dispatch),
     deleteIdea: () => deleteIdea(dispatch),
   };

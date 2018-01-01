@@ -28,7 +28,8 @@ const customStyle = {
     textAlign: 'center',
     verticalAlign: 'text-top',
   }
-}
+};
+
 class IdeaIndex extends Component {
   constructor(props){
     super(props);

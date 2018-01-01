@@ -1,6 +1,6 @@
 import { CREATE_IDEA, FETCH_IDEA, FETCH_ALL_IDEAS, UPDATE_IDEA, DELETE_IDEA } from "../actions";
 
-function IdeaReducer (state = {}, action) {
+export default function(state = {}, action) {
   switch (action.type) {
     //
     // case CREATE_IDEA:
@@ -19,5 +19,3 @@ function IdeaReducer (state = {}, action) {
       return state;
   }
 }
-
-export default IdeaReducer;
