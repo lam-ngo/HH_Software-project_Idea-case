@@ -9,7 +9,12 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-const store = createStore(reducers, { }, applyMiddleware(promise));
+const initialState = {
+  ideaList: [],
+  comment: [],
+};
+
+const store = createStore(reducers, initialState, applyMiddleware(promise));
 ReactDOM.render(
     <Provider store={store}>
         <App/>

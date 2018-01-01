@@ -53,3 +53,7 @@
 .button-delete {
   background-color: #E46B6B;
 }
+
+.text-top {
+  vertical-align: text-top;
+}

@@ -9,10 +9,10 @@ export const FETCH_ALL_COMMENTS = "fetch_all_comments";
 
 const ROOT_URL = 'https://idea-management.herokuapp.com/api/ideas';
 
-function receiveData(dataType, json) {
-  console.log(`From action creator: ${json}`);
+function receiveData(request, json) {
+  console.log(`From action creator: ${request}, ${json}`);
   return {
-    type: dataType,
+    type: request,
     payload: json
   }
 }
@@ -35,13 +35,14 @@ export function fetchIdea(id, callback) {
   };
 }
 
-export function fetchAllIdeas(callback) {
-  const request = axios.get(`${ROOT_URL}`).then((response) => receiveData('ALL_IDEAS', response.data));
-
-  return {
-    type: FETCH_ALL_IDEAS,
-    payload: request
-  };
+export function fetchAllIdeas(dispatch) {
+ // const request = axios.get(`${ROOT_URL}`).then((response) => dispatch(receiveData('ALL_IDEAS', response.data)));
+ //
+ //  return {
+ //    type: FETCH_ALL_IDEAS,
+ //    payload: request
+ //  };
+ return axios.get(`${ROOT_URL}`).then((response) => dispatch(receiveData(FETCH_ALL_IDEAS, response.data)));
 }
 
 export function updateIdea(id, value, callback) {

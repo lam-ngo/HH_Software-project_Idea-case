@@ -5,44 +5,88 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchAllIdeas } from "../actions";
 
+const customStyle = {
+  heading: {
+    margin: '0px 0px 30px 0px',
+  },
+  rowHead: {
+    height: '80px',
+  },
+  row: {
+    height: '100px',
+  },
+  idColumn: {
+    width: '50px',
+    textAlign: 'center',
+    verticalAlign: 'text-top',
+  },
+  titleColumn: {
+    textAlign: 'center',
+    verticalAlign: 'text-top',
+  },
+  viewColumn: {
+    width: '120px',
+    textAlign: 'center',
+    verticalAlign: 'text-top',
+  }
+}
 class IdeaIndex extends Component {
   constructor(props){
     super(props);
-      this.state = {
-        term: '',
-        allIdeas: null
-      }
+    this.state = {
+      term: ''
+    }
+    //this.getALlIdeas = fetchAllIdeas(this.props.dispatch);
   }
 
   componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(fetchAllIdeas());
+    //console.log(this.props.state);
+    // const dispatch = this.props.store.dispatch;
+    this.props.fetchAllIdeas();
+
+    console.log(`From container didMount: ${this.props.ideaList}`);
   }
 
   renderIdeas() {
-    const allIdeas = (this.state.allIdeas) ? this.state.allIdeas : this.props.ideas;
-    return _.map(allIdeas, (idea) => {
-      return (
-        <li key={idea._id}>
-          <Link to={`/ideas/:${idea._id}`}>
-            {idea.id}<br/>
-            {idea.title}<br/>
-
-          </Link>
-
-        </li>
-      );
-    });
+    let ideaList = this.props.ideaList;
+    console.log(`From container render: ${this.props.ideaList}`);
+    if(ideaList === undefined){
+      return '';
+    } else {
+      //return ideaList.toString();
+      //return ideaList.length;
+      const listAllIdeas = ideaList.map((idea) => (
+          <tr style={customStyle.row} key={idea.id}>
+            <td style={customStyle.idColumn} >{idea.id}</td>
+            <td style={customStyle.titleColumn} >{idea.title}</td>
+            <td style={customStyle.viewColumn} >
+              <Link to={`/ideas/:${idea.id}`}>View idea</Link>
+            </td>
+          </tr>
+        ));
+      return listAllIdeas;
+    }
   }
 
   render() {
     return (
       <div>
         <div className="container">
-          <h3>IDEA BOARD</h3>
-          <ul>
-            {this.renderIdeas()}
-          </ul>
+          <h3 style={customStyle.heading} >IDEA BOARD</h3>
+
+          <table>
+            <thead>
+              <tr style={customStyle.rowHead}>
+                <th style={customStyle.idColumn} >ID</th>
+                <th style={customStyle.titleColumn} >Title</th>
+                <th style={customStyle.viewColumn} ></th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.renderIdeas()}
+            </tbody>
+          </table>
+
         </div>
 
         <div className="container">
@@ -56,11 +100,18 @@ class IdeaIndex extends Component {
   }
 }
 
-IdeaIndex.propTypes = {
-  dispatch: PropTypes.func.isRequired
-}
-function mapStateToProps(state) {
-  return { ideas: state.ideas };
+IdeaIndex.PropTypes = {
+  ideaList: PropTypes.array.isRequired
 }
 
-export default connect(mapStateToProps, { fetchAllIdeas })(IdeaIndex);
+const mapStateToProps = (state) => {
+  return { ideaList: state.ideaList };
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchAllIdeas: () => fetchAllIdeas(dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(IdeaIndex);

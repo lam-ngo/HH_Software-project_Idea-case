@@ -4,9 +4,8 @@ import IdeaReducer from "./reducer_idea";
 import CommentReducer from "./reducer_comment";
 
 const rootReducer = combineReducers({
-  idea: IdeaReducer,
+  ideaList: IdeaReducer,
   comment: CommentReducer,
-  form: formReducer
 });
 
 export default rootReducer;
