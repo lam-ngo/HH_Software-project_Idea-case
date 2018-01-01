@@ -32,7 +32,7 @@ class IdeaShow extends Component {
   onDeleteClick = () => {
     console.log(this.props.chosenIdea.id);
     this.props.deleteIdea(this.props.chosenIdea.id);
-    this.props.history.push("/");
+    window.location = "/";
   }
 
   render() {

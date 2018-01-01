@@ -39,7 +39,7 @@ class IdeaNew extends Component {
       newIdea.peopleNeeded !== '' && newIdea.categoryId !== ''
     ) {
       this.props.createIdea(newIdea);
-      this.props.history.push("/");
+      window.location = "/";
     } else {
       alert('No field can be empty!');
     }

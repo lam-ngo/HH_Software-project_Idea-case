@@ -40,7 +40,7 @@ class IdeaEdit extends Component {
       editIdea.peopleNeeded !== '' && editIdea.categoryId !== ''
     ) {
       this.props.updateIdea(this.props.chosenIdea.id, editIdea);
-      this.props.history.push(`/ideas/${this.props.chosenIdea.id}`);
+      window.location = `/ideas/${this.props.chosenIdea.id}`;
     } else {
       alert('No field can be empty!');
     }
