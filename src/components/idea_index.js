@@ -41,6 +41,7 @@ class IdeaIndex extends Component {
 
   renderIdeas() {
     let ideaList = this.props.ideaList;
+    console.log(`From main page container: ${ideaList}`);
     if(ideaList === undefined){
       return '';
     } else {
@@ -49,7 +50,7 @@ class IdeaIndex extends Component {
             <td style={customStyle.idColumn} >{idea.id}</td>
             <td style={customStyle.titleColumn} >{idea.title}</td>
             <td style={customStyle.viewColumn} >
-              <Link to={`/ideas/:${idea.id}`}>View idea</Link>
+              <Link to={`/ideas/${idea.id}`}>View idea</Link>
             </td>
           </tr>
         ));
@@ -60,7 +61,7 @@ class IdeaIndex extends Component {
   render() {
     return (
       <div>
-        
+
         <div className="container">
           <h3 style={customStyle.heading} >IDEA BOARD</h3>
           <table>
@@ -93,7 +94,7 @@ IdeaIndex.PropTypes = {
 }
 
 const mapStateToProps = (state) => {
-  return { ideaList: state.ideaList };
+  return { ideaList: state.idea.ideaList };
 }
 
 const mapDispatchToProps = (dispatch) => {

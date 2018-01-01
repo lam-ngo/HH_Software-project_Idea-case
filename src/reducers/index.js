@@ -4,7 +4,7 @@ import IdeaReducer from "./reducer_idea";
 import CommentReducer from "./reducer_comment";
 
 const rootReducer = combineReducers({
-  ideaList: IdeaReducer,
+  idea: IdeaReducer,
   comment: CommentReducer,
 });
 

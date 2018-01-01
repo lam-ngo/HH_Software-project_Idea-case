@@ -7,7 +7,7 @@ export const UPDATE_IDEA = "update_idea";
 export const DELETE_IDEA = "delete_idea";
 export const FETCH_ALL_COMMENTS = "fetch_all_comments";
 
-//const ROOT_URL = 'https://idea-management.herokuapp.com/api/ideas';
+const ROOT_URL = 'https://idea-management.herokuapp.com/api/ideas';
 
 function receiveData(request, json) {
   console.log(`From action creator: ${request}, ${json}`);
