@@ -1,4 +1,3 @@
-import _ from "lodash";
 import PropTypes from 'prop-types';
 import React, { Component } from "react";
 import { connect } from "react-redux";
@@ -33,28 +32,18 @@ const customStyle = {
 class IdeaIndex extends Component {
   constructor(props){
     super(props);
-    this.state = {
-      term: ''
-    }
-    //this.getALlIdeas = fetchAllIdeas(this.props.dispatch);
+    this.state = {}
   }
 
   componentDidMount() {
-    //console.log(this.props.state);
-    // const dispatch = this.props.store.dispatch;
     this.props.fetchAllIdeas();
-
-    console.log(`From container didMount: ${this.props.ideaList}`);
   }
 
   renderIdeas() {
     let ideaList = this.props.ideaList;
-    console.log(`From container render: ${this.props.ideaList}`);
     if(ideaList === undefined){
       return '';
     } else {
-      //return ideaList.toString();
-      //return ideaList.length;
       const listAllIdeas = ideaList.map((idea) => (
           <tr style={customStyle.row} key={idea.id}>
             <td style={customStyle.idColumn} >{idea.id}</td>
@@ -71,9 +60,9 @@ class IdeaIndex extends Component {
   render() {
     return (
       <div>
+        
         <div className="container">
           <h3 style={customStyle.heading} >IDEA BOARD</h3>
-
           <table>
             <thead>
               <tr style={customStyle.rowHead}>
@@ -86,7 +75,6 @@ class IdeaIndex extends Component {
               {this.renderIdeas()}
             </tbody>
           </table>
-
         </div>
 
         <div className="container">
