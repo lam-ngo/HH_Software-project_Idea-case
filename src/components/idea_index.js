@@ -1,4 +1,5 @@
 import _ from "lodash";
+import PropTypes from 'prop-types';
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -14,7 +15,8 @@ class IdeaIndex extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchAllIdeas();
+    const { dispatch } = this.props;
+    dispatch(fetchAllIdeas());
   }
 
   renderIdeas() {
@@ -54,6 +56,9 @@ class IdeaIndex extends Component {
   }
 }
 
+IdeaIndex.propTypes = {
+  dispatch: PropTypes.func.isRequired
+}
 function mapStateToProps(state) {
   return { ideas: state.ideas };
 }

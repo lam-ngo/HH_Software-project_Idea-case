@@ -9,6 +9,14 @@ export const FETCH_ALL_COMMENTS = "fetch_all_comments";
 
 const ROOT_URL = 'https://idea-management.herokuapp.com/api/ideas';
 
+function receiveData(dataType, json) {
+  console.log(`From action creator: ${json}`);
+  return {
+    type: dataType,
+    payload: json
+  }
+}
+
 export function createIdea(value, callback) {
   const request = axios.post(`${ROOT_URL}`, value).then(() => callback());
 
@@ -28,7 +36,7 @@ export function fetchIdea(id, callback) {
 }
 
 export function fetchAllIdeas(callback) {
-  const request = axios.get(`${ROOT_URL}`).then(() => callback());
+  const request = axios.get(`${ROOT_URL}`).then((response) => receiveData('ALL_IDEAS', response.data));
 
   return {
     type: FETCH_ALL_IDEAS,

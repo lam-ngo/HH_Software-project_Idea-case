@@ -10,8 +10,9 @@ export default function(state = {}, action) {
     case FETCH_IDEA:
       return { ...state, [action.payload.data._id]: action.payload.data };
 
-    case FETCH_ALL_IDEAS:
-      return _.mapKeys(action.payload.data, "_id");
+    case 'ALL_IDEAS':
+      console.log(`From reducer: ${action.payload}`);
+      return {...state, ideaList: action.payload};
 
     case UPDATE_IDEA:
       return state;
