@@ -27,6 +27,7 @@
   cursor: pointer;
   width: 240px;
   height: 64px;
+  margin: 20px 10px;
   padding-top: 18px;
   border-radius: 10px;
   display: inline-block;

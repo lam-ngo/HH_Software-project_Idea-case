@@ -18,6 +18,13 @@ const customStyle = {
 };
 
 class IdeaShow extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      editToggle: "close"
+    }
+  }
+
   componentDidMount() {
     const { id } = this.props.match.params;
     this.props.fetchIdea(id);
@@ -31,8 +38,6 @@ class IdeaShow extends Component {
     //   this.props.history.push("/");
     // });
   }
-
-
 
   render() {
     const { chosenIdea, commentList } = this.props;
@@ -56,15 +61,16 @@ class IdeaShow extends Component {
           <p><strong>Category id:</strong> {chosenIdea.categoryId}</p>
         </div>
 
+        <Link to="/"><button className="button button-primary button-text">Back To Home Page</button></Link>
+        <Link to="/edit"><button className="button button-edit button-text">Edit Idea</button></Link>
+        <button className="button button-delete button-text" onClick={this.onDeleteClick}>Delete Idea</button>
+
         <h3 style={customStyle.heading} >Comments</h3>
 
         <div style={customStyle.container}>
           <ShowAllComments commentList={commentList}/>
         </div>
 
-        <Link to="/"><button className="button button-primary button-text">Back To Home Page</button></Link>
-        <button className="button button-edit button-text" onClick={this.onDeleteClick}>Edit Idea</button>
-        <button className="button button-delete button-text" onClick={this.onDeleteClick}>Delete Idea</button>
       </div>
     );
   }
@@ -81,8 +87,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchIdea: (id) => fetchIdea(id, dispatch),
     fetchAllComments: (id) => fetchAllComments(id, dispatch),
-    updateIdea: () => updateIdea(dispatch),
-    deleteIdea: () => deleteIdea(dispatch),
+    updateIdea: (id, editIdea) => updateIdea(id, editIdea, dispatch),
+    deleteIdea: (id) => deleteIdea(id, dispatch)
   };
 }
 

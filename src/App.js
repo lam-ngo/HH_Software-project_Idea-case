@@ -5,6 +5,9 @@ import reducers from "./reducers";
 import IdeaIndex from "./components/idea_index";
 import IdeaNew from "./components/idea_new";
 import IdeaShow from "./components/idea_show";
+import IdeaEdit from "./components/idea_edit";
+import Test from "./components/test";
+
 import "./App.css";
 
 class App extends Component {
@@ -17,6 +20,7 @@ class App extends Component {
               <Route exact path="/" component={IdeaIndex} />
               <Route path="/ideas/new" component={IdeaNew} />
               <Route path="/ideas/:id" component={IdeaShow} />
+              <Route path="/edit" component={IdeaEdit} />
             </Switch>
           </div>
         </div>

@@ -26,21 +26,7 @@ class IdeaNew extends Component {
       }
     }
   }
-  renderField(field) {
-    // const { meta: { touched, error } } = field;
-    // const className = `form-group ${touched && error ? "has-danger" : ""}`;
-    //
-    // return (
-    //   <div className={className}>
-    //     <label>{field.label}</label>
-    //     <input type="text" {...field.input} />
-    //     <div>
-    //       {touched ? error : ""}
-    //     </div>
-    //   </div>
-    // );
-  }
-
+  
   onSubmit(e) {
     e.preventDefault();
 
