@@ -42,7 +42,6 @@ class IdeaIndex extends Component {
 
   renderIdeas() {
     let ideaList = this.props.ideaList;
-    console.log(`From main page container: ${ideaList}`);
     if(ideaList === undefined){
       return '';
     } else {

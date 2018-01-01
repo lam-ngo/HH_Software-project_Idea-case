@@ -10,7 +10,6 @@ export const FETCH_ALL_COMMENTS = "fetch_all_comments";
 const ROOT_URL = 'https://idea-management.herokuapp.com/api/ideas';
 
 function receiveData(request, json) {
-  console.log(`From action creator: ${request}, ${json}`);
   return {
     type: request,
     payload: json

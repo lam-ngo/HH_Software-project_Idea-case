@@ -20,9 +20,7 @@ const customStyle = {
 class IdeaShow extends Component {
   constructor(props){
     super(props);
-    this.state = {
-      editToggle: "close"
-    }
+    this.state = {}
   }
 
   componentDidMount() {
@@ -31,12 +29,10 @@ class IdeaShow extends Component {
     this.props.fetchAllComments(id);
   }
 
-  onDeleteClick() {
-    // const { id } = this.props.match.params;
-    //
-    // this.props.deleteIdea(id, () => {
-    //   this.props.history.push("/");
-    // });
+  onDeleteClick = () => {
+    console.log(this.props.chosenIdea.id);
+    this.props.deleteIdea(this.props.chosenIdea.id);
+    this.props.history.push("/");
   }
 
   render() {

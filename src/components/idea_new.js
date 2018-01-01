@@ -26,8 +26,8 @@ class IdeaNew extends Component {
       }
     }
   }
-  
-  onSubmit(e) {
+
+  onSubmit = (e) => {
     e.preventDefault();
 
     let newIdea = this.state.newIdea;
@@ -50,7 +50,7 @@ class IdeaNew extends Component {
     return (
       <div className="container">
         <h3 style={customStyle.heading} >NEW IDEA</h3>
-        <form onSubmit={this.onSubmit.bind(this)}>
+        <form onSubmit={this.onSubmit}>
           <p>Title</p>
           <input name="title" value={this.state.newIdea.title} onChange={this.inputChanged} />
           <p>Description</p>
