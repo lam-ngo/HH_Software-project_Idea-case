@@ -6,7 +6,6 @@ import IdeaIndex from "./components/idea_index";
 import IdeaNew from "./components/idea_new";
 import IdeaShow from "./components/idea_show";
 import IdeaEdit from "./components/idea_edit";
-import Test from "./components/test";
 
 import "./App.css";
 

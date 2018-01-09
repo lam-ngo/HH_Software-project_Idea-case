@@ -20,6 +20,7 @@ const customStyle = {
     verticalAlign: 'text-top',
   },
   titleColumn: {
+    width: '790px',
     textAlign: 'center',
     verticalAlign: 'text-top',
   },
@@ -40,7 +41,7 @@ class IdeaIndex extends Component {
     this.props.fetchAllIdeas();
   }
 
-  renderIdeas() {
+  renderIdeas = () => {
     let ideaList = this.props.ideaList;
     if(ideaList === undefined){
       return '';
@@ -59,6 +60,20 @@ class IdeaIndex extends Component {
   }
 
   render() {
+    let ideaTable;
+
+    if(this.props.ideaList === undefined) {
+      ideaTable =
+        <tr>
+          <td></td>
+          <td>Loading...</td>
+          <td></td>
+        </tr>
+      ;
+    } else {
+      ideaTable = this.renderIdeas();
+    }
+    
     return (
       <div>
 
@@ -73,7 +88,7 @@ class IdeaIndex extends Component {
               </tr>
             </thead>
             <tbody>
-              {this.renderIdeas()}
+              {ideaTable}
             </tbody>
           </table>
         </div>
