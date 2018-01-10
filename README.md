@@ -3,7 +3,20 @@ Single page application using React and Redux. The application requests data fro
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-The application is deployed at: http://softwareproject.s3-website-eu-west-1.amazonaws.com/.  
+The application deployment (not yet ready) at: http://softwareproject.s3-website-eu-west-1.amazonaws.com/.  
+
+## Developer guide
+- Download or clone this project source code to your local machine.  
+- Run  
+```  
+  npm install  
+```  
+  to install all the dependencies.  
+- Run  
+```  
+  npm start  
+```  
+  to start the project on prefer browser(port 3000).  
 
 ## Application structure
 ```  
@@ -41,3 +54,8 @@ With simple requirement from the course, the Idea Case does not have authenticat
 
 ## Further Extension
 This project will be extended according to team agreement.
+
+## Learning Resources  
+- Course materials.  
+- React.js official documentation at https://reactjs.org/.  
+- Redux official documentation at https://redux.js.org/.  
