@@ -73,7 +73,7 @@ class IdeaIndex extends Component {
     } else {
       ideaTable = this.renderIdeas();
     }
-    
+
     return (
       <div>
 
@@ -94,8 +94,10 @@ class IdeaIndex extends Component {
         </div>
 
         <div className="container">
-            <Link className="button button-primary button-text" to="/ideas/new">
-              ADD NEW IDEA
+            <Link to="/ideas/new">
+              <button className="button button-primary button-text">
+                ADD NEW IDEA
+              </button>
             </Link>
         </div>
 
